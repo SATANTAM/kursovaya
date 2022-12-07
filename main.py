@@ -3,7 +3,7 @@ from tkinter import messagebox
 import random
 
 
-instr = 'Программа '
+instr = 'Программа для решения МТЗ'
 
 zach = 'd'
 
@@ -12,7 +12,6 @@ def File():
 
 def Spravka():
     messagebox.showinfo("Справка", zach)
-
 
 
 root = Tk()
