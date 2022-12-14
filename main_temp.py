@@ -12,13 +12,15 @@ def generate_model(structure_size, center, layers_sizes, layers_p, sizes_limit_h
             return False
         if len(structure_size) != 2 or len(center) != 2 or len(layers_sizes) + 1 != len(layers_p):
             return False
+        if len(sizes_limit_height) != 2 or len(sizes_limit_width) != 2:
+            return False
         if center[0] > structure_size[0] or center[1] > structure_size[1]:
             return False
         return True
 
     if not validate_data():
         print("Неправильно введены данные")
-        return False
+        return False, False, False
 
     structure = np.zeros(structure_size)
 
@@ -74,7 +76,7 @@ def solve_model(structure, heights):
 
 
 def main():
-    structure, structure_heights, structure_widths = generate_model([100, 100], [50, 50], [10, 30], [1000, 500, 100], [10, 10], [10, 10])
+    structure, structure_heights, structure_widths = generate_model([100, 100], [50, 50], [10, 30, 40], [1000, 500, 3000, 0], [10, 10], [10, 10])
 
     figure, axs = plt.subplots(1, 1, figsize=(5, 5))
     p2 = axs.imshow(structure, cmap='jet', aspect='auto', interpolation='bilinear', origin="upper")
