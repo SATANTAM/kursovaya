@@ -119,6 +119,53 @@ def main():
             structure, structure_heights, structure_widths = params[0], params[1], params[2]
 
             figure, axs = plt.subplots(1, 1, figsize=(5, 5))
+
+            new_structure_width = [0]
+            t = 0
+            for i, e in enumerate(structure_widths):
+                t += e
+                new_structure_width.append(t)
+
+            new_structure_height = [0]
+            t = 0
+            for i, e in enumerate(structure_heights):
+                t += e
+                new_structure_height.append(t)
+
+            if len(structure_widths) > 15:
+                x_ticks = [0]
+                x_labels = [0]
+                for i in range(13):
+                    x_ticks.append(len(structure_widths) // 13 * (i+1))
+                    x_labels.append(new_structure_width[x_ticks[-1]])
+                x_ticks.append(len(structure_widths)-1)
+                x_labels.append(new_structure_width[-1])
+            else:
+                x_ticks = [i for i in range(0, len(structure_widths))]
+                x_labels = new_structure_width
+
+            if len(structure_heights) > 15:
+                y_ticks = [0]
+                y_labels = [0]
+                for i in range(13):
+                    y_ticks.append(len(structure_heights) // 13 * (i+1))
+                    y_labels.append(new_structure_height[y_ticks[-1]])
+                y_ticks.append(len(structure_heights)-1)
+                y_labels.append(new_structure_height[-1])
+            else:
+                y_ticks = [i for i in range(0, len(structure_heights))]
+                y_labels = new_structure_height
+
+            axs.set_xticks(x_ticks)
+            axs.set_xticklabels(x_labels)
+            axs.set_xlim([x_ticks[0], x_ticks[-1]])
+            axs.set_xlabel("Расстояние по горизонтали, м")
+
+            axs.set_yticks(y_ticks[::-1])
+            axs.set_yticklabels(y_labels)
+            axs.set_ylim([y_ticks[0], y_ticks[-1]])
+            axs.set_ylabel("Расстояние по вертикали, м")
+
             p2 = axs.imshow(structure, cmap='jet', aspect='auto', interpolation='bilinear', origin="upper")
             figure.colorbar(p2)
             plt.show()
@@ -154,10 +201,25 @@ def main():
             figure, axs = plt.subplots(1, 1, figsize=(5, 5))
 
             axs.plot([i + 1 for i in range(len(temp_mas))], temp_mas)
+
+            if len(structure_widths) > 15:
+                x_ticks = [0]
+                x_labels = [1]
+                t = len(structure_widths)//13
+                for i in range(0 + t, t * 14, t):
+                    x_ticks.append(i)
+                    x_labels.append(i-1)
+                x_ticks.append(len(structure_widths)-1)
+                x_labels.append(len(structure_widths))
+            else:
+                x_ticks = [i for i in range(0, len(structure_widths))]
+                x_labels = [i+1 for i in range(0, len(structure_widths))]
+
+            axs.set_xticks(x_ticks)
+            axs.set_xticklabels(x_labels)
+            axs.set_xlim([0, len(structure_widths)-1])
+
             axs.set_yscale('log')
-            axs.set_xticks([i + 1 for i in range(0, len(temp_mas), len(temp_mas) // 10)])
-            axs.set_xticklabels([i + 1 for i in range(0, len(temp_mas), len(temp_mas) // 10)])
-            axs.set_xlim([1, len(temp_mas)])
             axs.set_xlabel("Номер пикета")
             axs.set_ylabel(r"Кажущееся сопротивление, $lg(\rho_{T})$")
 
@@ -194,11 +256,26 @@ def main():
             figure, axs = plt.subplots(1, 1, figsize=(5, 5))
 
             axs.plot([i + 1 for i in range(len(temp_mas))], temp_mas)
-            axs.set_xticks([i + 1 for i in range(0, len(temp_mas), len(temp_mas) // 10)])
-            axs.set_xticklabels([i + 1 for i in range(0, len(temp_mas), len(temp_mas) // 10)])
-            axs.set_xlim([1, len(temp_mas)])
+
+            if len(structure_widths) > 15:
+                x_ticks = [0]
+                x_labels = [1]
+                t = len(structure_widths)//13
+                for i in range(0 + t, t * 14, t):
+                    x_ticks.append(i)
+                    x_labels.append(i-1)
+                x_ticks.append(len(structure_widths)-1)
+                x_labels.append(len(structure_widths))
+            else:
+                x_ticks = [i for i in range(0, len(structure_widths))]
+                x_labels = [i+1 for i in range(0, len(structure_widths))]
+
+            axs.set_xticks(x_ticks)
+            axs.set_xticklabels(x_labels)
+            axs.set_xlim([0, len(structure_widths)-1])
+
             axs.set_xlabel("Номер пикета")
-            axs.set_ylabel(r"Кажущееся сопротивление, $lg(\rho_{T})$")
+            axs.set_ylabel(r"Периоды, $T [с]$")
 
             legend_marks = [round(i, 2) for i in t_s]
             axs.legend(legend_marks, title=r"Периоды, $T [с]$")
@@ -232,8 +309,37 @@ def main():
 
             figure, axs = plt.subplots(1, 1, figsize=(5, 5))
 
+            new_structure_width = [0]
+            t = 0
+            for i, e in enumerate(structure_widths):
+                t += e
+                new_structure_width.append(t)
+
+            if len(structure_widths) > 15:
+                x_ticks = [0]
+                x_labels = [0]
+                for i in range(13):
+                    x_ticks.append(len(structure_widths) // 13 * (i + 1))
+                    x_labels.append(new_structure_width[x_ticks[-1]])
+                x_ticks.append(len(structure_widths) - 1)
+                x_labels.append(new_structure_width[-1])
+            else:
+                x_ticks = [i for i in range(0, len(structure_widths))]
+                x_labels = new_structure_width
+
+            axs.set_xticks(x_ticks)
+            axs.set_xticklabels(x_labels)
+            axs.set_xlim([0, len(structure_widths)-1])
+            axs.set_xlabel("Расстояние по горизонтали, м")
+
+            axs.set_ylim([len(t_s)-1, 0])
+            axs.set_yticks([i for i in range(0, len(t_s))])
+            axs.set_yticklabels([round(i, 2) for i in t_s])
+            axs.set_ylabel(r"Периоды, $T [с]$")
+
             p2 = axs.imshow(temp_mas, cmap='jet', aspect='auto', interpolation='bilinear', origin="upper")
             cb = figure.colorbar(p2)
+            cb.set_label(r"Кажущееся сопротивление, $lg(\rho_{T})$")
             plt.show()
 
     def phi_map(event):
@@ -264,8 +370,37 @@ def main():
 
             figure, axs = plt.subplots(1, 1, figsize=(5, 5))
 
+            new_structure_width = [0]
+            t = 0
+            for i, e in enumerate(structure_widths):
+                t += e
+                new_structure_width.append(t)
+
+            if len(structure_widths) > 15:
+                x_ticks = [0]
+                x_labels = [0]
+                for i in range(13):
+                    x_ticks.append(len(structure_widths) // 13 * (i + 1))
+                    x_labels.append(new_structure_width[x_ticks[-1]])
+                x_ticks.append(len(structure_widths) - 1)
+                x_labels.append(new_structure_width[-1])
+            else:
+                x_ticks = [i for i in range(0, len(structure_widths))]
+                x_labels = new_structure_width
+
+            axs.set_xticks(x_ticks)
+            axs.set_xticklabels(x_labels)
+            axs.set_xlim([0, len(structure_widths)-1])
+            axs.set_xlabel("Расстояние по горизонтали, м")
+
+            axs.set_ylim([len(t_s)-1, 0])
+            axs.set_yticks([i for i in range(0, len(t_s))])
+            axs.set_yticklabels([round(i, 2) for i in t_s])
+            axs.set_ylabel(r"Периоды, $T [с]$")
+
             p2 = axs.imshow(temp_mas, cmap='jet', aspect='auto', interpolation='bilinear', origin="upper")
             cb = figure.colorbar(p2)
+            cb.set_label(r"Фаза импеданса, $\phi$")
             plt.show()
 
     master = Tk()
