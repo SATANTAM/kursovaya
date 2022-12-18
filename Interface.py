@@ -189,11 +189,11 @@ def main():
 
             solutions = []
 
-            for i in structure:
-                # print(solve_model(i, structure_heights))
-                solutions.append(solve_model(i, structure_heights)[0])
+            for i in range(len(structure)):
+                temp = [j[i] for j in structure]
+                solutions.append(solve_model(temp, structure_heights)[0])
 
-            t_s = solve_model(structure[0], structure_heights)[-1]
+            t_s = solve_model(temp, structure_heights)[-1]
 
             # print(solutions)
             temp_mas = np.log10(np.array(solutions))
@@ -246,10 +246,11 @@ def main():
 
             solutions = []
 
-            for i in structure:
-                solutions.append(solve_model(i, structure_heights)[1])
+            for i in range(len(structure)):
+                temp = [j[i] for j in structure]
+                solutions.append(solve_model(temp, structure_heights)[1])
 
-            t_s = solve_model(structure[0], structure_heights)[-1]
+            t_s = solve_model(temp, structure_heights)[-1]
 
             temp_mas = np.array(solutions)
 
@@ -300,10 +301,11 @@ def main():
 
             solutions = []
 
-            for i in structure:
-                solutions.append(solve_model(i, structure_heights)[0])
+            for i in range(len(structure)):
+                temp = [j[i] for j in structure]
+                solutions.append(solve_model(temp, structure_heights)[0])
 
-            t_s = solve_model(structure[0], structure_heights)[-1]
+            t_s = solve_model(temp, structure_heights)[-1]
 
             temp_mas = np.log10(np.array(solutions).transpose())
 
@@ -361,10 +363,11 @@ def main():
 
             solutions = []
 
-            for i in structure:
-                solutions.append(solve_model(i, structure_heights)[1])
+            for i in range(len(structure)):
+                temp = [j[i] for j in structure]
+                solutions.append(solve_model(temp, structure_heights)[1])
 
-            t_s = solve_model(structure[0], structure_heights)[-1]
+            t_s = solve_model(temp, structure_heights)[-1]
 
             temp_mas = np.array(solutions).transpose()
 
@@ -405,10 +408,10 @@ def main():
 
     master = Tk()
 
-    l1 = Label(master, text="Длина по оси X:")
-    l2 = Label(master, text="Длина по оси Y:")
-    l3 = Label(master, text="Центральная точка по X")
-    l4 = Label(master, text="Центральная точка по Y:")
+    l1 = Label(master, text="Длина по оси Y:")
+    l2 = Label(master, text="Длина по оси X:")
+    l3 = Label(master, text="Центральная точка по Y")
+    l4 = Label(master, text="Центральная точка по X:")
     l5 = Label(master, text="Размеры слоев (через ',')")
     l6 = Label(master, text="p слоев (через ',')")
     l7 = Label(master, text="Лимиты размеров по X(через ',')")
@@ -448,7 +451,7 @@ def main():
     e5.insert(0, "10, 20")
     e6.insert(0, "1000, 500, 100")
     e7.insert(0, "100, 100")
-    e8.insert(0, "100, 200")
+    e8.insert(0, "100, 100")
 
     b1 = Button(master, text="Визуализировать данные")
     b2 = Button(master, text="Кривые Pho кажущегося")
